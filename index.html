@@ -33,6 +33,21 @@
             line-height: 1.8;
         }
 
+        .mobile-menu-btn {
+            display: none;
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 101;
+            background: var(--primary);
+            color: var(--background);
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
         .container {
             display: flex;
             min-height: 100vh;
@@ -307,12 +322,19 @@
         }
 
         @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
             .sidebar {
+                display: none;
                 width: 100%;
                 height: auto;
                 position: relative;
                 padding: 2rem 1rem;
                 overflow-y: visible;
+            }
+            .sidebar.show {
+                display: block;
             }
             .main-content {
                 margin-left: 0;
@@ -356,6 +378,7 @@
     </style>
 </head>
 <body>
+    <button class="mobile-menu-btn">☰ Menu</button>
     <div class="container">
         <aside class="sidebar">
             <h1>Aliya Sheikh</h1>
@@ -498,6 +521,13 @@
             document.querySelectorAll('.card').forEach(card => {
                 observer.observe(card);
             });
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const sidebar = document.querySelector('.sidebar');
+        mobileMenuBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('show');
         });
     </script>
 </body>
